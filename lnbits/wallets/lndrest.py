@@ -52,7 +52,7 @@ class LndRestWallet(Wallet):
             url=f"{self.endpoint}/v1/channels/transactions",
             headers=self.auth_admin,
             verify=self.auth_cert,
-            json={"payment_request": bolt11},
+            json={"payment_request": bolt11, "allow_self_payment": True}},
         )
         ok, checking_id, fee_msat, error_message = r.ok, None, 0, None
         r = get(url=f"{self.endpoint}/v1/payreq/{bolt11}", headers=self.auth_admin, verify=self.auth_cert,)
